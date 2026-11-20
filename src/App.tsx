@@ -1,5 +1,10 @@
+import ExpenseForm from "./components/ExpenseForm";
 function App() {
-  return <div>Hello</div>;
+  return (
+    <div>
+      <ExpenseForm />
+    </div>
+  );
 }
 
 export default App;
