@@ -63,9 +63,11 @@ function ExpenseForm() {
         </label>
         <select
           {...register("category")}
-          className="form-control"
+          className="form-select"
+          aria-label="Default select example"
           id="category"
         >
+          <option defaultValue={"Nothing"}>Select Category</option>
           <option value="food">Food</option>
           <option value="housing">Housing</option>
           <option value="transportation">Transportation</option>
