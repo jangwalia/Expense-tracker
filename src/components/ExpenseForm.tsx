@@ -31,7 +31,7 @@ function ExpenseForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="mainForm" onSubmit={handleSubmit(onSubmit)}>
       <div className=" mb-3">
         <label htmlFor="description" className="form-label">
           Description
