@@ -1,10 +1,13 @@
 import type { ExpenseList } from "../types/expense";
 interface ExpenseTable {
   tableData: ExpenseList[];
+  handleDelete: (id: number) => void;
 }
 
-function ExpenseListTable({ tableData }: ExpenseTable) {
-  return (
+function ExpenseListTable({ tableData, handleDelete }: ExpenseTable) {
+  return tableData.length === 0 ? (
+    <h2>No Expense Found</h2>
+  ) : (
     <table className="table">
       <thead>
         <tr>
@@ -23,7 +26,11 @@ function ExpenseListTable({ tableData }: ExpenseTable) {
             <td>${item.amount}</td>
             <td>{item.category}</td>
             <td>
-              <button type="button" className="btn btn-outline-danger">
+              <button
+                onClick={() => handleDelete(item.id)}
+                type="button"
+                className="btn btn-outline-danger"
+              >
                 Delete
               </button>
             </td>

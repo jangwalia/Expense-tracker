@@ -16,9 +16,15 @@ function App() {
   });
   const [filterList, setFilterList] = useState<ExpenseList[]>(initialList);
   const handleFilterChange = (data: string) => {
+    console.log(data);
     setFilter({
       selectedFilterCategory: data,
     });
+    setFilterList((prev) => prev.filter((item) => item.category == data));
+  };
+
+  const handleDelete = (id: number) => {
+    setFilterList((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
@@ -26,7 +32,7 @@ function App() {
       <Heading />
       <ExpenseForm filterList={filterList} handleForm={setFilterList} />
       <CategoryList filter={filter} updateFilter={handleFilterChange} />
-      <ExpenseListTable tableData={filterList} />
+      <ExpenseListTable handleDelete={handleDelete} tableData={filterList} />
     </div>
   );
 }

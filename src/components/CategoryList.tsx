@@ -18,11 +18,11 @@ function CategoryList({ filter, updateFilter }: CategoryListProp) {
         aria-label="Default select example"
       >
         <option defaultValue="">Choose Category</option>
-        <option value="food">Food</option>
-        <option value="housing">Housing</option>
-        <option value="entertainment">Entertainment</option>
-        <option value="transportation">Transportation</option>
-        <option value="utilities">Utilities</option>
+        <option value="Food">Food</option>
+        <option value="Housing">Housing</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Transportation">Transportation</option>
+        <option value="Utilities">Utilities</option>
       </select>
     </div>
   );
