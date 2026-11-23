@@ -20,10 +20,11 @@ function App() {
       selectedFilterCategory: data,
     });
   };
+
   return (
     <div>
       <Heading />
-      <ExpenseForm />
+      <ExpenseForm filterList={filterList} handleForm={setFilterList} />
       <CategoryList filter={filter} updateFilter={handleFilterChange} />
       <ExpenseListTable tableData={filterList} />
     </div>
