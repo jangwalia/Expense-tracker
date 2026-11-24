@@ -11,7 +11,7 @@ let Schema = z.object({
     .number("Must be Number")
     .max(1000, { message: "Amount cannot exceed $1000" }),
   category: z.enum(
-    ["food", "housing", "transportation", "utilities", "entertainment"],
+    ["Food", "Housing", "Transportation", "Utilities", "Entertainment"],
     {
       message: "Please select a valid Category",
     },
@@ -82,11 +82,11 @@ function ExpenseForm({ handleForm, filterList }: ExpenseFormProp) {
           id="category"
         >
           <option defaultValue={"Nothing"}>Select Category</option>
-          <option value="food">Food</option>
-          <option value="housing">Housing</option>
-          <option value="transportation">Transportation</option>
-          <option value="utilities">Utilities</option>
-          <option value="entertainment">Entertainment</option>
+          <option value="Food">Food</option>
+          <option value="Housing">Housing</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Entertainment">Entertainment</option>
         </select>
         {errors.category && (
           <p className="text-danger">{errors.category.message}</p>

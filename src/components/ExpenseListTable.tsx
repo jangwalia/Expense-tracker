@@ -1,4 +1,5 @@
 import type { ExpenseList } from "../types/expense";
+import NoExpenseBanner from "./NoExpenseBanner";
 interface ExpenseTable {
   tableData: ExpenseList[];
   handleDelete: (id: number) => void;
@@ -6,9 +7,9 @@ interface ExpenseTable {
 
 function ExpenseListTable({ tableData, handleDelete }: ExpenseTable) {
   return tableData.length === 0 ? (
-    <h2>No Expense Found</h2>
+    <NoExpenseBanner />
   ) : (
-    <table className="table">
+    <table className="table table-bordered">
       <thead>
         <tr>
           <th scope="col">#</th>

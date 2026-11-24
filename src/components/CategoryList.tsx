@@ -1,8 +1,6 @@
 interface CategoryListProp {
   updateFilter: (data: string) => void;
-  filter: {
-    selectedFilterCategory: string | null;
-  };
+  filter: string;
 }
 
 function CategoryList({ filter, updateFilter }: CategoryListProp) {
@@ -10,7 +8,7 @@ function CategoryList({ filter, updateFilter }: CategoryListProp) {
     <div className="categoryWrapper">
       <h2>Filter By Category</h2>
       <select
-        value={filter.selectedFilterCategory || ""}
+        value={filter || ""}
         onChange={(e) => {
           updateFilter(e.target.value);
         }}
