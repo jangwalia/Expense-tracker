@@ -1,6 +1,7 @@
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { ExpenseList } from "../types/expense";
 
 let Schema = z.object({
   description: z
@@ -19,7 +20,12 @@ let Schema = z.object({
 
 type ExpenseForm = z.infer<typeof Schema>;
 
-function ExpenseForm() {
+interface ExpenseFormProp {
+  handleForm: (data: any) => void;
+  filterList: ExpenseList[];
+}
+
+function ExpenseForm({ handleForm, filterList }: ExpenseFormProp) {
   const {
     register,
     handleSubmit,
@@ -27,7 +33,15 @@ function ExpenseForm() {
   } = useForm<ExpenseForm>({ resolver: zodResolver(Schema) });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+    handleForm([
+      ...filterList,
+      {
+        id: z.uuid(),
+        title: data.description,
+        amount: data.amount,
+        category: data.category,
+      },
+    ]);
   };
 
   return (
