@@ -18,7 +18,7 @@ function ReusableModal({
   return (
     <>
       <div
-        className="modal show d-block"
+        className=" modal show d-block bg-dark bg-opacity-50"
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
