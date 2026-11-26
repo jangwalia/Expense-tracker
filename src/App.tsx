@@ -5,34 +5,44 @@ import CategoryList from "./components/CategoryList";
 import ExpenseListTable from "./components/ExpenseListTable";
 import "./App.css";
 import { initialList } from "./data/expense";
+
 import type { ExpenseList } from "./types/expense";
 
-interface FilterCategory {
-  selectedFilterCategory: string | null;
-}
 function App() {
-  const [filter, setFilter] = useState<FilterCategory>({
-    selectedFilterCategory: null,
-  });
+  const [filter, setFilter] = useState("");
   const [filterList, setFilterList] = useState<ExpenseList[]>(initialList);
   const handleFilterChange = (data: string) => {
-    console.log(data);
-    setFilter({
-      selectedFilterCategory: data,
-    });
-    setFilterList((prev) => prev.filter((item) => item.category == data));
+    setFilter(data);
   };
+  const visibleExpense = filter
+    ? filterList.filter((expense) => expense.category == filter)
+    : filterList;
 
   const handleDelete = (id: number) => {
     setFilterList((prev) => prev.filter((item) => item.id !== id));
+  };
+  const addExpense = (list: ExpenseList) => {
+    setFilterList([
+      ...filterList,
+      {
+        ...list,
+        id: list.id,
+        title: list.title,
+        amount: list.amount,
+        category: list.category,
+      },
+    ]);
   };
 
   return (
     <div>
       <Heading />
-      <ExpenseForm filterList={filterList} handleForm={setFilterList} />
+      <ExpenseForm handleForm={addExpense} />
       <CategoryList filter={filter} updateFilter={handleFilterChange} />
-      <ExpenseListTable handleDelete={handleDelete} tableData={filterList} />
+      <ExpenseListTable
+        handleDelete={handleDelete}
+        tableData={visibleExpense}
+      />
     </div>
   );
 }

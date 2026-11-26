@@ -1,14 +1,16 @@
 import type { ExpenseList } from "../types/expense";
+import NoExpenseBanner from "./NoExpenseBanner";
 interface ExpenseTable {
   tableData: ExpenseList[];
   handleDelete: (id: number) => void;
 }
 
 function ExpenseListTable({ tableData, handleDelete }: ExpenseTable) {
+  const total = tableData.reduce((sum, item) => sum + item.amount, 0);
   return tableData.length === 0 ? (
-    <h2>No Expense Found</h2>
+    <NoExpenseBanner />
   ) : (
-    <table className="table">
+    <table className="table table-bordered">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -37,6 +39,13 @@ function ExpenseListTable({ tableData, handleDelete }: ExpenseTable) {
           </tr>
         ))}
       </tbody>
+      <tfoot className="table-light fw-bold">
+        <tr>
+          <td colSpan={2}>Total</td>
+          <td>${total.toFixed(2)}</td>
+          <td colSpan={2}></td>
+        </tr>
+      </tfoot>
     </table>
   );
 }
