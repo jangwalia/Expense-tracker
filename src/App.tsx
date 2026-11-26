@@ -21,11 +21,23 @@ function App() {
   const handleDelete = (id: number) => {
     setFilterList((prev) => prev.filter((item) => item.id !== id));
   };
+  const addExpense = (list: ExpenseList) => {
+    setFilterList([
+      ...filterList,
+      {
+        ...list,
+        id: list.id,
+        title: list.title,
+        amount: list.amount,
+        category: list.category,
+      },
+    ]);
+  };
 
   return (
     <div>
       <Heading />
-      <ExpenseForm filterList={visibleExpense} handleForm={setFilterList} />
+      <ExpenseForm handleForm={addExpense} />
       <CategoryList filter={filter} updateFilter={handleFilterChange} />
       <ExpenseListTable
         handleDelete={handleDelete}

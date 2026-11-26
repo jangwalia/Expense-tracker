@@ -6,6 +6,7 @@ interface ExpenseTable {
 }
 
 function ExpenseListTable({ tableData, handleDelete }: ExpenseTable) {
+  const total = tableData.reduce((sum, item) => sum + item.amount, 0);
   return tableData.length === 0 ? (
     <NoExpenseBanner />
   ) : (
@@ -38,6 +39,13 @@ function ExpenseListTable({ tableData, handleDelete }: ExpenseTable) {
           </tr>
         ))}
       </tbody>
+      <tfoot className="table-light fw-bold">
+        <tr>
+          <td colSpan={2}>Total</td>
+          <td>${total.toFixed(2)}</td>
+          <td colSpan={2}></td>
+        </tr>
+      </tfoot>
     </table>
   );
 }

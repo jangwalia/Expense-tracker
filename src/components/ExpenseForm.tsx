@@ -1,10 +1,9 @@
-import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { ExpenseList } from "../types/expense";
 
 let Schema = z.object({
-  description: z
+  title: z
     .string()
     .min(3, { message: "Description must be 3 characters long" }),
   amount: z
@@ -22,43 +21,28 @@ type ExpenseForm = z.infer<typeof Schema>;
 
 interface ExpenseFormProp {
   handleForm: (data: any) => void;
-  filterList: ExpenseList[];
 }
 
-function ExpenseForm({ handleForm, filterList }: ExpenseFormProp) {
+function ExpenseForm({ handleForm }: ExpenseFormProp) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ExpenseForm>({ resolver: zodResolver(Schema) });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    handleForm([
-      ...filterList,
-      {
-        id: z.uuid(),
-        title: data.description,
-        amount: data.amount,
-        category: data.category,
-      },
-    ]);
-  };
-
   return (
-    <form className="mainForm" onSubmit={handleSubmit(onSubmit)}>
+    <form className="mainForm" onSubmit={handleSubmit(handleForm)}>
       <div className=" mb-3">
-        <label htmlFor="description" className="form-label">
+        <label htmlFor="title" className="form-label">
           Description
         </label>
         <input
-          {...register("description")}
+          {...register("title")}
           type="text"
           className="form-control"
-          id="description"
+          id="title"
         />
-        {errors.description && (
-          <p className="text-danger">{errors.description.message}</p>
-        )}
+        {errors.title && <p className="text-danger">{errors.title.message}</p>}
 
         <label htmlFor="amount" className="form-label">
           Amount
